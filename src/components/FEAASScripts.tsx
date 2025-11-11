@@ -1,9 +1,6 @@
-/* eslint-disable */
-// Rest of your file code
 import Image from 'next/image';
 import * as FEAAS from '@sitecore-feaas/clientside/react';
 import nextConfig from 'next.config';
-import { RemotePattern } from 'next/dist/shared/lib/image-config';
 // Element implementations for Sitecore Component Builder can be overriden here
 
 const FEAASScripts = (): JSX.Element => {
@@ -21,7 +18,7 @@ const FEAASScripts = (): JSX.Element => {
       return (
         domains.some((domain) => url.hostname === domain) ||
         remotePatterns.some(
-          (pattern: RemotePattern) =>
+          (pattern) =>
             pattern.protocol === url.protocol.slice(0, -1) &&
             new RegExp('^' + convertToRegex(pattern.hostname) + '$').test(url.hostname)
         )
@@ -33,6 +30,7 @@ const FEAASScripts = (): JSX.Element => {
   // Register next Image to be used in Component Builder.
   // Nextjs image implementation will be used when img is rendered in component from Component Builder
   FEAAS.setElementImplementation('img', (attributes: Record<string, string>) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, src, alt, ...imgAttributes } = attributes;
     return (
       <Image
